@@ -1,10 +1,12 @@
 
+
 class Player
 {
-  
+  final int centre = 250;
+  float diameter = 30;
   void display()
   {
-    ellipse(250, 250, 30, 30);
+    ellipse(centre, centre, diameter, diameter);
   }
   
   void update()

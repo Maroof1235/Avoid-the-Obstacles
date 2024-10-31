@@ -1,24 +1,25 @@
 //global variables
 Player player;
-Enemy enemy1;
+Enemy enemy1, enemy2, enemy3;
 
 
 void setup()
 {
   size(500, 500);
   player = new Player();
-  enemy1 = new Enemy(30, 50);
+  enemy1 = new Enemy(30, 50, 50, 50);
+
   
 }
 
 void draw()
 {
   background(120);
-  player.display();
-  enemy1.display();
-  
+  player.update();
+  enemy1.update();
 }
 
+//When the specific key is pressed, the move functions are called
 void keyPressed()
 {
   switch(keyCode)
