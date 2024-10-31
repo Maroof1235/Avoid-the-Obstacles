@@ -7,7 +7,7 @@ void setup()
 {
   size(500, 500);
   player = new Player();
-  enemy1 = new Enemy(10, 50);
+  enemy1 = new Enemy(30, 50);
   
 }
 
@@ -21,22 +21,6 @@ void draw()
 
 void keyPressed()
 {
-  //if (keyCode == UP)
-  //{
-  // enemy1.moveDown();
-  //}
-  //else if (keyCode == DOWN)
-  //{
-  // enemy1.moveUp();
-  //}
-  //else if (keyCode == RIGHT)
-  //{
-  // enemy1.moveLeft();
-  //}
-  //else 
-  //{
-  // enemy1.moveRight();
-  //}
   switch(keyCode)
   {
     case UP:

@@ -12,7 +12,7 @@ class Enemy
   void display()
   {
     rectMode(CENTER);
-    rect(x, y, 10, 10);
+    rect(x, y, 30, 30);
     
   }
   
