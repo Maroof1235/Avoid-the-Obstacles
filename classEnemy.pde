@@ -4,8 +4,8 @@ class Enemy
 {
   float x,y, rectWidth, rectHeight, direction;
  
-  Player d = new Player();
-  Player c = new Player();
+  Player d = new Player(250, 250, 30, 30);
+  Player c = new Player(250, 250, 30, 30);
   float radius = d.diameter/2;
 
   
@@ -81,19 +81,13 @@ class Enemy
     y = newY;
   }
   
-  
-  //Collision detection. Checks overlap. If right edge overlaps with left side of circle, as well as other conditions then collision detected. Bounding box collision.
-  void collision()
+  //Method that calculates the distance between two points. 33.5 is the distance that the two points must be less than to detect collision
+  boolean collision(Player other)
   {
-    
-    if ((x - (rectWidth/2) <= (c.centre + radius) && //Left edge check
-       x + (rectWidth/2) >= (c.centre - radius)) && //Right edge check
-      (y + (rectHeight/2) >= (c.centre - radius) && //Bottom edge check
-       y - (rectHeight/2) <= (c.centre + radius))) //Top edge check
-       {
-         print("working ");
-       }
+     return dist(this.x ,this.y, other.x, other.y) < 33.5;
   }
+
+
   
   //Collection of methods that move the obstable a certain direction when a key is pressed.
   void moveUp()
@@ -120,7 +114,6 @@ class Enemy
   void update()
   {
     display();
-    collision();
     spawn();
     if(direction == 0)
     {

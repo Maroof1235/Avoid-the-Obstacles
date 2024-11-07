@@ -10,7 +10,7 @@ Enemy[] rightEnemies = new Enemy[2];
 void setup()
 {
   size(500, 500);
-  player = new Player();
+  player = new Player(250, 250, 30, 30);
   //Populate enemies array with objects for each direction: top, left and right
   for(int i = 0; i < topEnemies.length; i++)
   {
@@ -29,90 +29,72 @@ void setup()
     int yPos = (int)random(30, 470);
     rightEnemies[i] = new Enemy(30, yPos, 30, 30, 1);
   }
+  
+
 }
 
 void draw()
 {
   background(120);
   player.update();
-  //Update all enemies in enemy array
-  for(int i = 0;i < topEnemies.length; i++)
-  {
-    topEnemies[i].update();
-  } 
   
-  for(int i = 0;i < leftEnemies.length; i++)
-  {
-    leftEnemies[i].update();
-  } 
+  //Update all enemies in enemy array 
+  updateEnemies(topEnemies);
+  updateEnemies(rightEnemies);
+  updateEnemies(leftEnemies);
   
-  for(int i = 0;i < rightEnemies.length; i++)
-  {
-    rightEnemies[i].update();
-  } 
+  collisionWithPlayer(topEnemies);
+  collisionWithPlayer(rightEnemies);
+  collisionWithPlayer(leftEnemies);
 }
 
 //When the specific key is pressed, the move functions are called
 void keyPressed()
 {
-  //Iterate through enemies array and move them accordingly
-  switch(keyCode)
+  moveEnemies(topEnemies, keyCode);
+  moveEnemies(rightEnemies, keyCode);
+  moveEnemies(leftEnemies, keyCode);
+}
+
+//When the specific key is pressed, the move functions are called
+void moveEnemies(Enemy[] enemies, int keyCode)
+{
+  for(int i = 0; i < enemies.length; i++)
   {
-    case UP:
-      for(int i = 0;i < topEnemies.length; i++)
-      {
-        topEnemies[i].moveDown();
-      }
-      for(int i = 0;i < leftEnemies.length; i++)
-      {
-        leftEnemies[i].moveDown();
-      }
-      for(int i = 0;i < rightEnemies.length; i++)
-      {
-        rightEnemies[i].moveDown();
-      }
-      break;
-    case DOWN: 
-     for(int i = 0;i < topEnemies.length; i++)
-      {
-        topEnemies[i].moveUp();
-      }
-      for(int i = 0;i < leftEnemies.length; i++)
-      {
-        leftEnemies[i].moveUp();
-      }
-      for(int i = 0;i < rightEnemies.length; i++)
-      {
-        rightEnemies[i].moveUp();
-      }
-      break;
-    case RIGHT:
-      for(int i = 0;i < topEnemies.length; i++)
-      {
-        topEnemies[i].moveLeft();
-      }
-      for(int i = 0;i < leftEnemies.length; i++)
-      {
-        leftEnemies[i].moveLeft();
-      }
-      for(int i = 0;i < rightEnemies.length; i++)
-      {
-        rightEnemies[i].moveLeft();
-      }
-      break;
-    case LEFT:
-      for(int i = 0;i < topEnemies.length; i++)
-      {
-        topEnemies[i].moveRight();
-      }
-      for(int i = 0;i < leftEnemies.length; i++)
-      {
-        leftEnemies[i].moveRight();
-      }
-      for(int i = 0;i < rightEnemies.length; i++)
-      {
-        rightEnemies[i].moveRight();
-      }
-      break;
+    switch(keyCode)
+    {
+      case UP:
+        enemies[i].moveDown();
+        break;
+      case DOWN:
+        enemies[i].moveUp();
+        break;
+      case RIGHT:
+        enemies[i].moveLeft();
+        break;
+      case LEFT:
+        enemies[i].moveRight();
+        break;
+    }
   }
+}
+
+//Function to iterate through the Enemy array (depending on which is called within function parameters) and update them 
+void updateEnemies(Enemy[] enemies)
+{
+  for(int i = 0; i < enemies.length; i++)
+  {
+    enemies[i].update();
+  }
+}
+
+void collisionWithPlayer(Enemy[] enemies)
+{
+ for(int i =0; i < enemies.length; i++)
+ {
+   if(enemies[i].collision(player))
+   {
+    print("working"); 
+   }
+ }
 }
